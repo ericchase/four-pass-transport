@@ -18,5 +18,11 @@
   "homepage": "https://github.com/ericchase/four-pass-transport#readme",
   "dependencies": {
     "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
