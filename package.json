@@ -1,0 +1,22 @@
+{
+  "name": "four-pass-transport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericchase/four-pass-transport.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericchase/four-pass-transport/issues"
+  },
+  "homepage": "https://github.com/ericchase/four-pass-transport#readme",
+  "dependencies": {
+    "typescript": "^3.2.2"
+  }
+}
