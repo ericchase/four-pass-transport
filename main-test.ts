@@ -1,7 +1,11 @@
-import { expect } from 'chai';
+﻿import { expect } from 'chai';
 
-describe('factorial test', function () {
-	it('should pass this canary test', function () {
-		expect(true).to.be.true;
-  });
+it('canary test', function () {
+	expect(true).to.be.true;
 });
+
+//describe('____ test', function () {
+//	it('should ____', function () {
+//		expect(____).to.be.true;
+//  });
+//});
