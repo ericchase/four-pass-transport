@@ -1,4 +1,4 @@
-﻿import { expect } from 'chai';
+import { expect } from 'chai';
 
 it('canary test', function () {
 	expect(true).to.be.true;
