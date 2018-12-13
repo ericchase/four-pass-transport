@@ -2,10 +2,6 @@ import {expect} from 'chai';
 import 'mocha';
 import {Cell} from '../src/cell';
 
-it('Canary', () => {
-  expect(true).is.true;
-});
-
 describe('Cell', () => {
   it('should contain a number between 0 and 99', () => {
     expect(() => new Cell(1)).to.not.throw();
