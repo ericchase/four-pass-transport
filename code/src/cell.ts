@@ -1,4 +1,4 @@
-export class cell {
+export class Cell {
   readonly r: number;
   readonly c: number;
 

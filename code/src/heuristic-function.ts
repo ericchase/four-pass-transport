@@ -1,10 +1,10 @@
-import { cell } from './cell';
+import { Cell } from './cell';
 
 export function make_heuristic_function(
   obstacles: boolean[],
-  heuristic: (a: cell, b: cell) => number
-): (a: cell, b: cell) => number {
-  return function (a: cell, b: cell): number {
+  heuristic: (a: Cell, b: Cell) => number
+): (a: Cell, b: Cell) => number {
+  return function (a: Cell, b: Cell): number {
     if (obstacles[a.rc()] || obstacles[b.rc()]) {
       return 0;
     }
@@ -12,7 +12,7 @@ export function make_heuristic_function(
   }
 }
 
-export function make_obstacle_list(...cells: cell[]): boolean[] {
+export function make_obstacle_list(...cells: Cell[]): boolean[] {
   let obstacles: boolean[] = [];
   for (let c of cells) {
     obstacles[c.rc()] = true;
@@ -20,6 +20,6 @@ export function make_obstacle_list(...cells: cell[]): boolean[] {
   return obstacles;
 }
 
-export function manhattan_distance(a: cell, b: cell): number {
+export function manhattan_distance(a: Cell, b: Cell): number {
   return Math.abs(a.r - b.r) + Math.abs(a.c - b.c);
 }
