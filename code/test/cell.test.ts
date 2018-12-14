@@ -38,17 +38,17 @@ describe('Cell', function () {
   });
 });
 
-describe('rc()', function () {
+describe('linearPosition', function () {
   it('should return 3 for r=0 and c=3', () => {
-    expect(new Cell(0, 3).rc())
+    expect(new Cell(0, 3).linearPosition)
       .to.equal(3);
   });
   it('should return 47 for r=4 and c=7', () => {
-    expect(new Cell(4, 7).rc())
+    expect(new Cell(4, 7).linearPosition)
       .to.equal(47);
   });
   it('should return 80 for r=8 and c=0', () => {
-    expect(new Cell(8, 0).rc())
+    expect(new Cell(8, 0).linearPosition)
       .to.equal(80);
   });
 });

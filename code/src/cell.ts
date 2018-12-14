@@ -1,15 +1,15 @@
 export class Cell {
-  readonly r: number;
-  readonly c: number;
-
   constructor(readonly row: number, readonly col: number) {
     if (row < 0 || row > 9) throw Error('cell out of bounds');
     if (col < 0 || col > 9) throw Error('cell out of bounds');
-    this.r = row;
-    this.c = col;
   }
 
-  rc() {
-    return this.r * 10 + this.c;
-  }
+  /**
+   * Concatenates .row to .col and returns 'rowcol' as number.
+   *
+   * @return {number}
+   */
+  get linearPosition(): number {
+    return this.row * 10 + this.col;
+  };
 }
