@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register test/**/*.ts"
+    "test": "mocha --require ts-node/register code/test/**/*.ts",
+    "coverage": "nyc --extension=.ts --extension=.js mocha --ui bdd --require ts-node/register code/test/**/*.ts"
   },
   "repository": {
     "type": "git",
