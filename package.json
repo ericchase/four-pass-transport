@@ -7,7 +7,8 @@
     "clean": "gulp clean",
     "test": "nyc --check-coverage mocha --require ts-node/register code/test/**",
     "test-mocha-report": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/mocha/test-results.xml --require ts-node/register code/test/**",
-    "test-watch": "mocha --watch --watch-extensions ts --require ts-node/register code/test/**"
+    "test-watch": "mocha --watch --watch-extensions ts --require ts-node/register code/test/**",
+    "rebuild-npm": "gulp remove-npm && npm i"
   },
   "repository": {
     "type": "git",

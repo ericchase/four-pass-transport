@@ -1,5 +1,5 @@
-var gulp = require('gulp');
-var del = require('del');
+const gulp = require('gulp');
+const del = require('del');
 
 gulp.task('clean', function () {
   return del([
@@ -10,5 +10,12 @@ gulp.task('clean', function () {
     'build',
     'test-reports',
     'test-reports-tmp',
+  ]);
+});
+
+gulp.task('remove-npm', function () {
+  return del([
+    'node_modules',
+    'package-lock.json'
   ]);
 });
