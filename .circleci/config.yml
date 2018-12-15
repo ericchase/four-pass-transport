@@ -41,7 +41,7 @@ jobs:
           command: npm test
       - run: # zip code coverage html report
           name: Zip Report
-          command: zip -r lcov-report.zip lcov-report
+          command: zip -r test-reports/nyc/lcov-report.zip test-reports/nyc/lcov-report
 
       - store_test_results:
           # Test Summary: https://circleci.com/docs/2.0/collect-test-data/
