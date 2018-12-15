@@ -6,7 +6,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/four-pass-transport/code
+    working_directory: ~/four-pass-transport
     docker:
       # specify the version you desire here
                        # was: 7.10
@@ -17,8 +17,8 @@ jobs:
       # - image: circleci/mongo:3.4.4
     steps:
       - checkout # special step to check out source code to working directory
-          working_directory: ~/four-pass-transport
       - run:
+          working_directory: ./code
           name: update-npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
@@ -28,6 +28,7 @@ jobs:
           - dependency-cache-{{ checksum "package.json" }}
           - dependency-cache-
       - run:
+          working_directory: ./code
           name: install-npm-wee
           command: npm install
       - save_cache: # special step to save the dependency cache
@@ -35,9 +36,11 @@ jobs:
           paths:
             - ./node_modules
       - run: # run tests
+          working_directory: ./code
           name: test
           command: npm test
       - run: # run coverage report
+          working_directory: ./code
           name: code-coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts: # special step to save test results as as artifact
