@@ -39,6 +39,9 @@ jobs:
       - run: # run code coverage
           name: Code Coverage
           command: npm test
+      - run: # zip code coverage html report
+          name: Zip Report
+          command: zip -r lcov-report.zip lcov-report
 
       - store_test_results:
           # Test Summary: https://circleci.com/docs/2.0/collect-test-data/
@@ -50,4 +53,8 @@ jobs:
       - store_artifacts: # save code coverage results as an artifact
           # Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-reports/nyc/lcov.info
+          prefix: coverage
+      - store_artifacts: # save code coverage results as an artifact
+          # Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: test-reports/nyc/lcov-report.zip
           prefix: coverage
