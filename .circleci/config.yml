@@ -71,9 +71,9 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
-        filters:
-          branches:
-            only: # add your branch here if you would like CI support
-              - master
-              - develop
+      - build:
+          filters:
+            branches:
+              only: # add your branch here if you would like CI support
+                - master
+                - develop
