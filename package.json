@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require ts-node/register code/test/**/*.ts",
-    "coverage": "nyc --extension=.ts --extension=.js mocha --ui bdd --require ts-node/register code/test/**/*.ts"
+    "code-coverage": "nyc --extension=.ts --extension=.js mocha --ui bdd --require ts-node/register code/test/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "@types/mocha": "^5.2.5",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   }
