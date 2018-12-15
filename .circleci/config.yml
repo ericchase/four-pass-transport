@@ -66,3 +66,14 @@ jobs:
       - store_test_results:
           # Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-reports
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: # add your branch here if you would like CI support
+                - master
+                - develop
