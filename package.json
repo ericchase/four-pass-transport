@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "gulp clean",
     "test": "nyc --check-coverage mocha --require ts-node/register code/test/**",
     "test-mocha-report": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/mocha/test-results.xml --require ts-node/register code/test/**",
     "test-watch": "mocha --watch --watch-extensions ts --require ts-node/register code/test/**"
@@ -23,6 +24,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.5",
     "chai": "^4.2.0",
+    "del": "^3.0.0",
     "gulp": "^4.0.0",
     "mocha": "^5.2.0",
     "mocha-junit-reporter": "^1.18.0",
