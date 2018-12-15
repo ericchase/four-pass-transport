@@ -6,6 +6,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/four-pass-transport/code
     docker:
       # specify the version you desire here
                        # was: 7.10
@@ -16,6 +17,7 @@ jobs:
       # - image: circleci/mongo:3.4.4
     steps:
       - checkout # special step to check out source code to working directory
+          working_directory: ~/four-pass-transport
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -47,4 +49,3 @@ jobs:
           prefix: coverage
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
-    working_directory: ~/repo/code
