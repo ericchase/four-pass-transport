@@ -45,9 +45,9 @@ jobs:
           path: test-reports
       - store_artifacts: # save test results as an artifact
           # Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: /test-reports/mocha/test-results.xml
+          path: test-reports/mocha/test-results.xml
           prefix: tests
       - store_artifacts: # save code coverage results as an artifact
           # Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: /test-reports/nyc/lcov.info
+          path: test-reports/nyc/lcov.info
           prefix: coverage
