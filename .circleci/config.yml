@@ -26,24 +26,28 @@ jobs:
             - dependency-cache-{{ checksum "package.json" }}
             - dependency-cache-
       - run:
-          name: install-npm-wee
+          name: NPM Install
           command: npm install
       - save_cache: # special step to save the dependency cache
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+
       - run: # run tests
-          name: test
+          name: Test
+          command: npm run test-mocha-report
+      - run: # run code coverage
+          name: Code Coverage
           command: npm test
-      - run: # run coverage report
-          name: code-coverage
-          command: npm run code-coverage
-      - store_artifacts: # special step to save test results as as artifact
-          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: test-results.xml
+
+      - store_test_results:
+          # Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: test-reports
+      - store_artifacts: # save test results as an artifact
+          # Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: /test-reports/mocha/test-results.xml
           prefix: tests
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: coverage
+      - store_artifacts: # save code coverage results as an artifact
+          # Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: /test-reports/nyc/lcov.info
           prefix: coverage
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test-results.xml

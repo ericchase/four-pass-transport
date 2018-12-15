@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register code/test/**/*.ts",
-    "code-coverage": "nyc --extension=.ts --extension=.js mocha --ui bdd --require ts-node/register code/test/**/*.ts"
+    "test": "nyc --check-coverage mocha --require ts-node/register code/test/**",
+    "test-mocha-report": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/mocha/test-results.xml --require ts-node/register code/test/**",
+    "test-watch": "mocha --watch --watch-extensions ts --require ts-node/register code/test/**"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,26 @@
     "nyc": "^13.1.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "all": true,
+    "include": [
+      "code/src/**/*.ts"
+    ],
+    "exclude": [
+      "code/src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
+    ],
+    "report-dir": "./test-reports/nyc",
+    "temp-dir": "./test-reports-tmp/nyc",
+    "cache": true
   }
 }
