@@ -36,25 +36,33 @@ jobs:
       - run: # run tests
           name: Test
           command: npm run test-mocha-report
-      - run: # run code coverage
-          name: Code Coverage
-          command: npm test
-      - run: # zip code coverage html report
-          name: Zip Report
-          command: zip -r test-reports/nyc/lcov-report.zip test-reports/nyc/lcov-report
-
-      - store_test_results:
-          # Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test-reports
       - store_artifacts: # save test results as an artifact
           # Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-reports/mocha/test-results.xml
           prefix: tests
+
+      - run: # run code coverage
+          name: Code Coverage
+          command: npm test
+          when: on_success
+      - run: # zip code coverage html report
+          name: Zip Report
+          command: |
+            pushd test-reports/nyc/lcov-report
+            zip -r9 ../lcov-report.zip *
+            popd
+          when: on_success
       - store_artifacts: # save code coverage results as an artifact
           # Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-reports/nyc/lcov.info
           prefix: coverage
+          when: on_success
       - store_artifacts: # save code coverage results as an artifact
           # Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-reports/nyc/lcov-report.zip
           prefix: coverage
+          when: on_success
+
+      - store_test_results:
+          # Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: test-reports
