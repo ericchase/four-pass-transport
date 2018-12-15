@@ -71,9 +71,9 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: # add your branch here if you would like CI support
-                - master
-                - develop
+      - build #: this colon only needed if rules are applied to the job
+       #   filters: # useful for applying a job to specific branches
+       #     branches:
+       #       only: # add your branch here if you would like CI support
+       #         - master
+       #         - develop
