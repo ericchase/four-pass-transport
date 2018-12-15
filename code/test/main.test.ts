@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 
-it('canary test', () => {
-  expect(true)
-    .to.be.true;
+describe('Main', function () {
+  it('canary test', () => {
+    expect(true)
+      .to.be.true;
+  });
 });
