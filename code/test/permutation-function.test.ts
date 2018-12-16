@@ -1,12 +1,11 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { Cell } from "../src/cell";
 import { threeAryPermutationGenerator } from "../src/permutation-function"
 
 describe('Permutation Functions', function () {
   describe('threeAryPermutationGenerator*', function () {
-    it('should yield permutations proper permutations of three arguments', () => {
+    it('should yield proper permutations of three arguments', () => {
       let generator = threeAryPermutationGenerator(1, 2, 3);
 
       expect(generator.next().value).to.deep.equal([1, 2, 3]);
