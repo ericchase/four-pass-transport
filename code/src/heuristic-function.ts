@@ -1,6 +1,6 @@
 import { Cell } from './cell';
 
-export function make_heuristic_function(
+export function makeHeuristicFunction(
   obstacles: boolean[],
   heuristic: (a: Cell, b: Cell) => number
 ): (a: Cell, b: Cell) => number {
@@ -12,7 +12,7 @@ export function make_heuristic_function(
   }
 }
 
-export function make_obstacle_list(...cells: Cell[]): boolean[] {
+export function makeObstacleList(...cells: Cell[]): boolean[] {
   let obstacles: boolean[] = [];
   for (let c of cells) {
     obstacles[c.linearPosition] = true;
@@ -20,6 +20,6 @@ export function make_obstacle_list(...cells: Cell[]): boolean[] {
   return obstacles;
 }
 
-export function manhattan_distance(a: Cell, b: Cell): number {
+export function manhattanDistance(a: Cell, b: Cell): number {
   return Math.abs(a.row - b.row) + Math.abs(a.col - b.col);
 }
