@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "gulp clean",
+    "test": "nyc --check-coverage mocha --require ts-node/register code/test/**",
+    "test-mocha-report": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/mocha/test-results.xml --require ts-node/register code/test/**",
+    "test-watch": "mocha --watch --watch-extensions ts --require ts-node/register code/test/**",
+    "rebuild-npm": "gulp remove-npm && npm i"
   },
   "repository": {
     "type": "git",
@@ -16,7 +20,38 @@
     "url": "https://github.com/ericchase/four-pass-transport/issues"
   },
   "homepage": "https://github.com/ericchase/four-pass-transport#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0",
+    "nyc": "^13.1.0",
+    "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "all": true,
+    "include": [
+      "code/src/**/*.ts"
+    ],
+    "exclude": [
+      "code/src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
+    ],
+    "report-dir": "./test-reports/nyc",
+    "temp-dir": "./test-reports-tmp/nyc",
+    "cache": true
   }
 }
