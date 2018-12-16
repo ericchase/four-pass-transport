@@ -1,14 +1,8 @@
-import { Cell } from './cell';
-
-export function* cell_pair_permutation_generator(cells: Cell[]) {
-  let ab: Cell[] = [cells[0], cells[1]];
-  let bc: Cell[] = [cells[1], cells[2]];
-  let cd: Cell[] = [cells[2], cells[3]];
-
-  yield [ab, bc, cd];
-  yield [ab, cd, bc];
-  yield [bc, ab, cd];
-  yield [bc, cd, ab];
-  yield [cd, ab, bc];
-  yield [cd, bc, ab];
+export function* threeAryPermutationGenerator<T>(a: T, b: T, c: T) {
+  yield [a, b, c];
+  yield [a, c, b];
+  yield [b, a, c];
+  yield [b, c, a];
+  yield [c, a, b];
+  yield [c, b, a];
 }
