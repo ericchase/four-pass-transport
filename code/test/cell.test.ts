@@ -3,6 +3,13 @@ import 'mocha';
 
 import { Cell } from "../src/cell";
 
+describe('canary', function () {
+  it('should not be dead', () => {
+    expect(true)
+      .to.be.true;
+  });
+});
+
 describe('Cell', function () {
   describe('constructor', function () {
     it('should contain a row and column between 0 and 9', () => {
