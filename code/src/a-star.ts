@@ -1,5 +1,4 @@
-/*
-  © 2011-2012 Xueqiao Xu <xueqiaoxu@gmail.com>
+/*© 2011-2012 Xueqiao Xu <xueqiaoxu@gmail.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of
   this software and associated documentation files (the "Software"), to deal in
@@ -17,34 +16,24 @@
   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  SOFTWARE.
-  */
+  SOFTWARE.*/
 
 import { MinHeap } from './min-heap';
 
-export class Node {
+export class Node<T> {
   g: number = 0;
   h: number = 0;
   f: number = 0;
   opened: boolean = false;
   closed: boolean = false;
-  x: number = 0;
-  y: number = 0;
-  parent: Node | undefined;
+  parent: T | undefined;
 }
 
-export class Graph {
-  static getNeighbors(node: Node): Node[] {
-    return [];
-  }
-
-  static getCost(nodeA: Node, nodeB: Node): number {
-    return Math.abs(nodeA.x - nodeB.x) + Math.abs(nodeA.y - nodeB.y)
-  }
-
-  static getHeuristic(nodeA: Node, nodeB: Node): number {
-    return Math.abs(nodeA.x - nodeB.x) + Math.abs(nodeA.y - nodeB.y)
-  }
+export interface Graph<T> {
+  getCost(nodeA: T, nodeB: T): number;
+  getHeuristic(nodeA: T, nodeB: T): number;
+  getMemoizedNode(node: T): T;
+  getNeighbors(node: T): T[];
 }
 
 /**
@@ -52,9 +41,12 @@ export class Graph {
  * @return {Array<Array<number>>} The path, including both start and
  *     end positions.
  */
-export function aStar(startNode: Node, endNode: Node, graph: Graph) {
+export function aStar<T extends Node<T>>(startNode: T, endNode: T, graph: Graph<T>) {
+  startNode = graph.getMemoizedNode(startNode);
+  endNode = graph.getMemoizedNode(endNode);
+
   // aka. the frontier or fringe
-  let openList = new MinHeap<Node>((cellA, cellB) => cellA.f - cellB.f);
+  let openList = new MinHeap<T>((cellA, cellB) => cellA.f - cellB.f);
 
   // set the `g` and `f` value of the start node to be 0
   startNode.g = 0;
@@ -67,19 +59,24 @@ export function aStar(startNode: Node, endNode: Node, graph: Graph) {
   // while the open list is not empty
   while (!openList.isEmpty()) {
     // pop the position of node which has the minimum `f` value.
-    let node: Node = openList.top;
+    let node: T = openList.top;
     openList.pop();
     node.closed = true;
 
     // if reached the end position, construct the path and return it
-    if (node === endNode) {
-      //return Util.backtrace(endNode);
+    if (node == endNode) {
+      let path: T[] = [node];
+      while (node.parent) {
+        node = node.parent;
+        path.push(node);
+      }
+      return path.reverse();
     }
 
-    // get neigbours of the current node
-    let neighbors: Node[] = Graph.getNeighbors(node);
+    // get neighbours of the current node
+    let neighbors: T[] = graph.getNeighbors(node);
     for (let i = 0, l = neighbors.length; i < l; ++i) {
-      let neighbor: Node = neighbors[i];
+      let neighbor: T = neighbors[i];
 
       if (neighbor.closed) {
         continue;
@@ -87,13 +84,13 @@ export function aStar(startNode: Node, endNode: Node, graph: Graph) {
 
       // get the distance between current node and the neighbor
       // and calculate the next g score
-      let new_g = node.g + Graph.getCost(node, neighbor);
+      let new_g = node.g + graph.getCost(node, neighbor);
 
       // check if the neighbor has not been inspected yet, or
       // can be reached with smaller cost from the current node
       if (!neighbor.opened || new_g < neighbor.g) {
         neighbor.g = new_g;
-        neighbor.h = neighbor.h || Graph.getHeuristic(node, endNode);
+        neighbor.h = neighbor.h || graph.getHeuristic(node, endNode);
         neighbor.f = neighbor.g + neighbor.h;
         neighbor.parent = node;
 

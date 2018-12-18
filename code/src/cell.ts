@@ -1,7 +1,10 @@
-export class Cell {
+import { Node } from './a-star';
+
+export class Cell extends Node<Cell> {
   constructor(readonly row: number, readonly col: number) {
-    if (row < 0 || row > 9) throw Error('cell out of bounds');
-    if (col < 0 || col > 9) throw Error('cell out of bounds');
+    super();
+    //if (row < 0 || row > 9) throw Error('cell out of bounds');
+    //if (col < 0 || col > 9) throw Error('cell out of bounds');
   }
 
   /**
