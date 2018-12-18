@@ -1,4 +1,17 @@
 export class MinHeap<T> {
+  static left(index: number): number {
+    return 2 * index + 1;
+  }
+
+  static right(index: number): number {
+    return 2 * index + 2;
+  }
+
+  static parent(index: number): number {
+    // aka. Math.floor(index/2)
+    return index >> 1;
+  }
+
   constructor(readonly compare: (cellA: T, cellB: T) => number) { }
 
   arr: T[] = [];
@@ -14,19 +27,6 @@ export class MinHeap<T> {
 
   isEmpty(): boolean {
     return this.size === 0;
-  }
-
-  static left(index: number): number {
-    return 2 * index + 1;
-  }
-
-  static right(index: number): number {
-    return 2 * index + 2;
-  }
-
-  static parent(index: number): number {
-    // aka. Math.floor(index/2)
-    return index >> 1;
   }
 
   get top(): T {
