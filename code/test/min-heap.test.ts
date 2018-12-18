@@ -1,64 +1,157 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { Comparable, MinHeap } from "../src/min-heap";
+import { MinHeap } from "../src/min-heap";
 
-// a comparable class for testing the min-heap
-class comparableNumber implements Comparable<comparableNumber> {
-  constructor(readonly value: number) { }
+let myHeap: MinHeap<number>;
 
-  equalTo(other: comparableNumber): boolean {
-    return this.value === other.value;
-  }
-
-  greaterThan(other: comparableNumber): boolean {
-    return this.value < other.value;
-  }
-
-  lessThan(other: comparableNumber): boolean {
-    return this.value > other.value;
-  }
-}
-
-let myHeap: MinHeap<comparableNumber>;
-
-before(function () {
-  myHeap = new MinHeap<comparableNumber>();
+beforeEach(function () {
+  myHeap = new MinHeap((a: number, b: number) => a - b);
 });
 
 describe('MinHeap', function () {
   describe('Member Functions', function () {
-    describe('arrayLength()', function () {
+    describe('arrayLength', function () {
       it('should return 0 for an empty heap', () => {
         expect(myHeap.arrayLength)
           .to.equal(0);
       });
-      it('should return 1 after a single successful push')
+      it('should return 1 after a single successful push', () => {
+        myHeap.push(1);
+        expect(myHeap.arrayLength)
+          .to.equal(1);
+      });
     });
 
-    describe('size()', function () {
+    describe('size', function () {
       it('should return 0 for an empty heap', () => {
         expect(myHeap.size)
           .to.equal(0);
       });
-      it('should return 1 after a single successful push')
+      it('should return 1 after a single successful push', () => {
+        myHeap.push(1);
+        expect(myHeap.size)
+          .to.equal(1);
+      });
+      it('should return 0 after a successful push and pop', () => {
+        myHeap.push(1);
+        myHeap.pop();
+        expect(myHeap.size)
+          .to.equal(0);
+      });
+    });
+
+    describe('isEmpty()', function () {
+      it('should return true for an empty heap', () => {
+        expect(myHeap.isEmpty())
+          .to.equal(true);
+      });
+      it('should return false for heap[1]', () => {
+        myHeap.push(1);
+        expect(myHeap.isEmpty())
+          .to.equal(false);
+      });
+    });
+
+    describe('top', function () {
+      it('should throw error for an empty heap', () => {
+        // notice that a function must be passed when checking for errors
+        expect(() => myHeap.top)
+          .to.throw(Error);
+      });
+      it('should return 1 for heap[1]', () => {
+        myHeap.push(1);
+        expect(myHeap.top)
+          .to.equal(1);
+      });
     });
 
     describe('push(element)', function () {
-      it('should result in heap [1,2,3] when pushing 1 to heap [2,3]', () => {
-        // myHeap.push(2);
-        // myHeap.push(3);
-        // expect(myHeap.push(1))
-        //   .to.have([1, 2, 3]);
+      it('should result in 1 at top when heap[].push(1)', () => {
+        myHeap.push(1);
+        expect(myHeap.top)
+          .to.equal(1);
+      });
+      it('should result in 1 at top when heap[2].push(1)', () => {
+        myHeap.push(2);
+        myHeap.push(1);
+        expect(myHeap.arr)
+          .to.include.deep.members([1, 2]);
+        expect(myHeap.top)
+          .to.equal(1);
+      });
+      it('should result in 1 at top when heap[1].push(2)', () => {
+        myHeap.push(2);
+        myHeap.push(1);
+        expect(myHeap.arr)
+          .to.include.deep.members([1, 2]);
+        expect(myHeap.top)
+          .to.equal(1);
+      });
+      it('should result in 1 at top when heap[2,3].push(1)', () => {
+        myHeap.push(2);
+        myHeap.push(3);
+        myHeap.push(1);
+        expect(myHeap.arr)
+          .to.include.deep.members([1, 2, 3]);
+        expect(myHeap.top)
+          .to.equal(1);
+      });
+      it('should result in 1 at top when heap[1,3].push(2)', () => {
+        myHeap.push(1);
+        myHeap.push(3);
+        myHeap.push(2);
+        expect(myHeap.arr)
+          .to.include.deep.members([1, 2, 3]);
+        expect(myHeap.top)
+          .to.equal(1);
+      });
+      it('should result in 1 at top when heap[1,2].push(3)', () => {
+        myHeap.push(1);
+        myHeap.push(2);
+        myHeap.push(3);
+        expect(myHeap.arr)
+          .to.include.deep.members([1, 2, 3]);
+        expect(myHeap.top)
+          .to.equal(1);
       });
     });
 
     describe('pop(element)', function () {
-      it('should result in heap [2,3] when popping 1 from heap [1,2,3]');
+      it('should throw error for an empty heap', () => {
+        // notice that a function must be passed when checking for errors
+        expect(() => myHeap.pop())
+          .to.throw(Error);
+      });
+      it('should result in heap [2,3] when heap[1,2,3].pop(1)', () => {
+        myHeap.push(1);
+        myHeap.push(2);
+        myHeap.push(3);
+        myHeap.pop();
+        expect(myHeap.arr)
+          .to.include.deep.members([2, 3]);
+        expect(myHeap.top)
+          .to.equal(2);
+      });
     });
 
-    describe('top(element)', function () {
-      it('should return 1 from heap [1,2,3]');
+    describe('updateItem(element)', function () {
+      it('should result in heap [2,3,4] when heap[1,2,3].updateItem(1, 4)', () => {
+        let myHeap = new MinHeap((a: { v: number }, b: { v: number }) => a.v - b.v);
+
+        let e = {v: 1};
+        myHeap.push(e);
+        myHeap.push({v: 2});
+        myHeap.push({v: 3});
+
+        e.v = 4;
+        myHeap.updateItem(e);
+
+        expect(myHeap.arr)
+          .to.include.deep.members([{v: 2}, {v: 3}, {v: 4}]);
+        expect(myHeap.top.v)
+          .to.equal(2);
+      });
     });
   });
 
@@ -88,13 +181,23 @@ describe('MinHeap', function () {
     });
 
     describe('parent(index)', function () {
-      it('should return Math.floor(index/2)', () => {
+      it('should return 0 for index=0', () => {
+        expect(MinHeap.parent(0))
+          .to.equal(0);
+      });
+
+      it('should return 0 for index=1', () => {
         expect(MinHeap.parent(1))
           .to.equal(0);
       });
 
-      it('should return 0 for index=0', () => {
-        expect(MinHeap.parent(0))
+      it('should return 1 for index=3', () => {
+        expect(MinHeap.parent(1))
+          .to.equal(0);
+      });
+
+      it('should return 2 for index=5', () => {
+        expect(MinHeap.parent(1))
           .to.equal(0);
       });
     });
