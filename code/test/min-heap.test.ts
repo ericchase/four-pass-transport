@@ -45,7 +45,12 @@ describe('MinHeap', function () {
     });
 
     describe('push(element)', function () {
-      it('should result in heap [1,2,3] when pushing 1 to heap [2,3]');
+      it('should result in heap [1,2,3] when pushing 1 to heap [2,3]', () => {
+        // myHeap.push(2);
+        // myHeap.push(3);
+        // expect(myHeap.push(1))
+        //   .to.have([1, 2, 3]);
+      });
     });
 
     describe('pop(element)', function () {
@@ -59,18 +64,39 @@ describe('MinHeap', function () {
 
   describe('Static Functions', function () {
     describe('left(index)', function () {
-      it('should return 2*index+1');
-      it('should return 1 for index=0');
+      it('should return 3 for index=1', () => {
+        expect(MinHeap.left(1))
+          .to.equal(3);
+      });
+
+      it('should return 1 for index=0', () => {
+        expect(MinHeap.left(0))
+          .to.equal(1);
+      });
     });
 
     describe('right(index)', function () {
-      it('should return 2*index+2');
-      it('should return 2 for index=0');
+      it('should return 4 for index=1', () => {
+        expect(MinHeap.right(1))
+          .to.equal(4);
+      });
+
+      it('should return 2 for index=0', () => {
+        expect(MinHeap.right(0))
+          .to.equal(2);
+      });
     });
 
     describe('parent(index)', function () {
-      it('should return Math.floor(index/2)');
-      it('should return 0 for index=0');
+      it('should return Math.floor(index/2)', () => {
+        expect(MinHeap.parent(1))
+          .to.equal(0);
+      });
+
+      it('should return 0 for index=0', () => {
+        expect(MinHeap.parent(0))
+          .to.equal(0);
+      });
     });
   });
 });
