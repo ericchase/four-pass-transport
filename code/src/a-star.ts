@@ -20,6 +20,8 @@
   SOFTWARE.
   */
 
+import { MinHeap } from './min-heap';
+
 export class Node {
   g: number = 0;
   h: number = 0;
@@ -52,7 +54,7 @@ export class Graph {
  */
 export function aStar(startNode: Node, endNode: Node, graph: Graph) {
   // aka. the frontier or fringe
-  let openList = new MinHeap((cellA, cellB) => cellA.f - cellB.f);
+  let openList = new MinHeap<Node>((cellA, cellB) => cellA.f - cellB.f);
 
   // set the `g` and `f` value of the start node to be 0
   startNode.g = 0;
@@ -63,20 +65,21 @@ export function aStar(startNode: Node, endNode: Node, graph: Graph) {
   startNode.opened = true;
 
   // while the open list is not empty
-  while (!openList.empty()) {
+  while (!openList.isEmpty()) {
     // pop the position of node which has the minimum `f` value.
-    let node: Node = openList.pop();
+    let node: Node = openList.top;
+    openList.pop();
     node.closed = true;
 
     // if reached the end position, construct the path and return it
     if (node === endNode) {
-      return Util.backtrace(endNode);
+      //return Util.backtrace(endNode);
     }
 
     // get neigbours of the current node
     let neighbors: Node[] = Graph.getNeighbors(node);
     for (let i = 0, l = neighbors.length; i < l; ++i) {
-      let neighbor = neighbors[i];
+      let neighbor: Node = neighbors[i];
 
       if (neighbor.closed) {
         continue;
