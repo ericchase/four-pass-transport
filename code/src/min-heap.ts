@@ -38,11 +38,7 @@ export class MinHeap<T> {
   push(element: T): void {
     this.heapSize = this.heapSize + 1;
     this.arr[this.heapSize - 1] = element;
-
-    let index: number = MinHeap.parent(this.heapSize - 1);
-    for (; index >= 0; --index) {
-      this.minHeapify(index);
-    }
+    this.siftUp(this.heapSize - 1);
   }
 
   pop(): void {
@@ -50,10 +46,28 @@ export class MinHeap<T> {
       throw new Error("heap underflow on pop");
     this.arr[0] = this.arr[this.heapSize - 1];
     this.heapSize = this.heapSize - 1;
-    this.minHeapify(0);
+    if (this.heapSize > 0)
+      this.siftDown(0);
   }
 
-  minHeapify(index: number): void {
+  updateItem(element: T): void {
+    let index = this.arr.indexOf(element);
+    for (; index >= 0; --index) {
+      this.siftDown(index);
+    }
+  }
+
+  private siftUp(index: number): void {
+    if (index > 0) {
+      let parent = MinHeap.parent(index);
+      if (this.arr[index] < this.arr[parent]) {
+        [this.arr[index], this.arr[parent]] = [this.arr[parent], this.arr[index]];
+        this.siftUp(parent);
+      }
+    }
+  }
+
+  private siftDown(index: number): void {
     let left = MinHeap.left(index);
     let right = MinHeap.right(index);
 
@@ -67,14 +81,7 @@ export class MinHeap<T> {
 
     if (smallest != index) {
       [this.arr[index], this.arr[smallest]] = [this.arr[smallest], this.arr[index]];
-      this.minHeapify(index);
-    }
-  }
-
-  updateItem(element: T): void {
-    let index = this.arr.indexOf(element);
-    for (; index >= 0; --index) {
-      this.minHeapify(index);
+      this.siftDown(index);
     }
   }
 }

@@ -124,6 +124,7 @@ describe('MinHeap', function () {
           .to.throw(Error);
       });
       it('should result in heap [2,3] when heap[1,2,3].pop(1)', () => {
+        // also test siftDown left
         myHeap.push(1);
         myHeap.push(2);
         myHeap.push(3);
@@ -132,6 +133,20 @@ describe('MinHeap', function () {
           .to.include.deep.members([2, 3]);
         expect(myHeap.top)
           .to.equal(2);
+      });
+      it('should result in heap [2,3] when heap[1,2,3].pop(1)', () => {
+        // also test siftDown right
+        myHeap.push(1);
+        myHeap.push(2);
+        myHeap.push(3);
+        myHeap.push(4);
+        myHeap.push(5);
+        myHeap.pop();
+        myHeap.pop();
+        expect(myHeap.arr)
+          .to.include.deep.members([3, 4, 5]);
+        expect(myHeap.top)
+          .to.equal(3);
       });
     });
 
