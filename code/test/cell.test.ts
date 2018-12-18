@@ -3,7 +3,7 @@ import 'mocha';
 
 import { Cell } from "../src/cell";
 
-describe('canary', function () {
+describe('canary()', function () {
   it('should not be dead', () => {
     expect(true)
       .to.be.true;
