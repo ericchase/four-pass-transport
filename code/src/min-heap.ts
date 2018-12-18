@@ -1,4 +1,17 @@
 export class MinHeap<T> {
+  static left(index: number): number {
+    return 2 * index + 1;
+  }
+
+  static right(index: number): number {
+    return 2 * index + 2;
+  }
+
+  static parent(index: number): number {
+    // aka. Math.floor(index/2)
+    return index >> 1;
+  }
+
   constructor(readonly compare: (cellA: T, cellB: T) => number) { }
 
   arr: T[] = [];
@@ -14,19 +27,6 @@ export class MinHeap<T> {
 
   isEmpty(): boolean {
     return this.size === 0;
-  }
-
-  static left(index: number): number {
-    return 2 * index + 1;
-  }
-
-  static right(index: number): number {
-    return 2 * index + 2;
-  }
-
-  static parent(index: number): number {
-    // aka. Math.floor(index/2)
-    return index >> 1;
   }
 
   get top(): T {
@@ -52,15 +52,14 @@ export class MinHeap<T> {
 
   updateItem(element: T): void {
     let index = this.arr.indexOf(element);
-    for (; index >= 0; --index) {
-      this.siftDown(index);
-    }
+    this.siftUp(index);
+    this.siftDown(0);
   }
 
   private siftUp(index: number): void {
     if (index > 0) {
       let parent = MinHeap.parent(index);
-      if (this.arr[index] < this.arr[parent]) {
+      if (this.compare(this.arr[index], this.arr[parent]) < 0) {
         [this.arr[index], this.arr[parent]] = [this.arr[parent], this.arr[index]];
         this.siftUp(parent);
       }
