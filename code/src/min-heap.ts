@@ -30,8 +30,10 @@ export class MinHeap<T> {
   }
 
   get top(): T {
-    if (this.heapSize < 1)
+    if (this.heapSize < 1){
+      console.log('minheap top underflow');
       throw new Error('heap underflow on pop');
+    }
     return this.arr[0];
   }
 
