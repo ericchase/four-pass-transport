@@ -6,12 +6,14 @@ import { MinHeap } from './min-heap';
 import { threeAryPermutationGenerator } from './permutation-function';
 
 
-export function getMinimalDistancePath(pathSet: PathSet) {
+export function getMinimalDistancePath(pathSet: PathSet): Cell[] {
   let board: AStarGrid = new AStarGrid(10, 10);
   board.setObstacles(pathSet.endpoints);
 
   for (let pair of pathSet.nextEndpointPair()) {
     let path: Cell[] = aStar(pair[0], pair[1], board);
+    if (path.length === 0)
+      return [];
     pathSet.storeNextPath(path);
     board.setObstacles(path);
   }
@@ -24,7 +26,10 @@ export function getAllMinimalDistancePaths(endpoints: Cell[]): MinHeap<Cell[]> {
 
   for (let order of threeAryPermutationGenerator<number>(0, 1, 2)) {
     let pathSet: PathSet = new PathSet(endpoints, order);
-    minHeap.push(getMinimalDistancePath(pathSet));
+    let path: Cell[] = getMinimalDistancePath(pathSet);
+    if (path.length === 0)
+      continue;
+    minHeap.push(path);
   }
 
   return minHeap;
