@@ -66,12 +66,16 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([6, 72, 9, 11]);
       expect(indices)
+        .to.deep.equal([]);
+      expect(indices)
         .to.have.length(39);
     });
   });
   describe('[ 8, 89, 46, 11 ]', function () {
     it('should pass', () => {
       let indices = fourPass([8, 89, 46, 11]);
+      expect(indices)
+        .to.deep.equal([]);
       expect(indices)
         .to.have.length(25);
     });
@@ -80,6 +84,8 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([94, 43, 76, 51]);
       expect(indices)
+        .to.deep.equal([]);
+      expect(indices)
         .to.have.length(24);
     });
   });
@@ -87,12 +93,16 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([22, 73, 41, 86]);
       expect(indices)
+        .to.deep.equal([]);
+      expect(indices)
         .to.have.length(21);
     });
   });
   describe('[ 38, 99, 53, 41 ]', function () {
     it('should pass', () => {
       let indices = fourPass([38, 99, 53, 41]);
+      expect(indices)
+        .to.deep.equal([]);
       expect(indices)
         .to.have.length(21);
     });
