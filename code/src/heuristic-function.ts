@@ -1,9 +1,8 @@
-export class Point {
-  constructor(readonly x: number,
-              readonly y: number
-  ) { }
+export interface Point {
+  getX(): number;
+  getY(): number;
 }
 
 export function manhattanDistance(a: Point, b: Point): number {
-  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+  return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
 }
