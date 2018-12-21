@@ -20,7 +20,7 @@ export function getMinimalDistancePath(pathSet: PathSet) {
 }
 
 export function getAllMinimalDistancePaths(endpoints: Cell[]): MinHeap<Cell[]> {
-  let minHeap = new MinHeap<Cell[]>((pathA: Cell[], pathB: Cell[]) => {return pathA.length - pathB.length;});
+  let minHeap: MinHeap<Cell[]> = new MinHeap<Cell[]>((pathA: Cell[], pathB: Cell[]) => {return pathA.length - pathB.length;});
 
   for (let order of threeAryPermutationGenerator<number>(0, 1, 2)) {
     let pathSet: PathSet = new PathSet(endpoints, order);
