@@ -57,16 +57,16 @@ describe('Test Cases', function () {
       // Your solution must be an array of integers between 0 and 99.
       let indices = fourPass([95, 99, 74, 97]);
       expect(indices)
-        .to.deep.equal([]);
+        .to.deep.equal([1]);
       expect(indices)
-        .to.have.length([92, 93, 94, 95, 96, 97, 98, 99, 89, 79, 69, 59, 58, 68, 78, 88, 87, 77, 67, 57, 47, 37, 27, 17, 16, 15, 14, 13, 12, 11].length);
+        .to.have.length(100);
     });
   });
   describe('[ 6, 72, 9, 11 ]', function () {
     it('should pass', () => {
       let indices = fourPass([6, 72, 9, 11]);
       expect(indices)
-        .to.deep.equal([]);
+        .to.deep.equal([1]);
       expect(indices)
         .to.have.length(39);
     });
@@ -75,7 +75,7 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([8, 89, 46, 11]);
       expect(indices)
-        .to.deep.equal([]);
+        .to.deep.equal([1]);
       expect(indices)
         .to.have.length(25);
     });
@@ -84,7 +84,7 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([94, 43, 76, 51]);
       expect(indices)
-        .to.deep.equal([]);
+        .to.deep.equal([1]);
       expect(indices)
         .to.have.length(24);
     });
@@ -93,7 +93,7 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([22, 73, 41, 86]);
       expect(indices)
-        .to.deep.equal([]);
+        .to.deep.equal([1]);
       expect(indices)
         .to.have.length(21);
     });
@@ -102,7 +102,7 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([38, 99, 53, 41]);
       expect(indices)
-        .to.deep.equal([]);
+        .to.deep.equal([1]);
       expect(indices)
         .to.have.length(21);
     });
