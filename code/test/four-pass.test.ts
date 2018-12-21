@@ -52,8 +52,10 @@ describe('Test Cases', function () {
   });
 
   // advanced cases
+
+  //TODO: empty array might have been pushed onto the heap
   describe('[ 95, 99, 74, 97 ]', function () {
-    it('should return length of 29', () => {
+    it('should pass', () => {
       // Your solution must be an array of integers between 0 and 99.
       let indices = fourPass([95, 99, 74, 97]);
       expect(indices)
@@ -66,7 +68,7 @@ describe('Test Cases', function () {
     it('should pass', () => {
       let indices = fourPass([6, 72, 9, 11]);
       expect(indices)
-        .to.deep.equal([1]);
+        .to.deep.equal([6,5,4,3,2,1,0,10,20,21,31,41,51,61,71,72,62,63,64,65,66,67,68,69,59,49,39,29,19,9,8,18,17,16,15,14,13,12,11]);
       expect(indices)
         .to.have.length(39);
     });
