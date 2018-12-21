@@ -78,7 +78,7 @@ export class MinHeap<T> {
         && this.compare(this.arr[right], this.arr[smallest]) < 0)
       smallest = right;
 
-    if (smallest != index) {
+    if (smallest !== index) {
       [this.arr[index], this.arr[smallest]] = [this.arr[smallest], this.arr[index]];
       this.siftDown(index);
     }
