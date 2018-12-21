@@ -73,13 +73,25 @@ describe('Grid', function () {
     });
   });
 
-  describe('isObstacle', function () {
-    it('should return true for Cell(2, 3)', function () {
-      grid.addObstacles([new Cell(2, 3)]);
+  describe('setObstacles', function () {
+    it('should set obstacle for Cell(2, 3)', function () {
+      grid.setObstacles([new Cell(2, 3)]);
       expect(grid.isObstacle(new Cell(2, 3)))
         .to.be.true;
     });
-    it('should return false for Cell(3, 3)', function () {
+  });
+
+  describe('setObstacles', function () {
+    it('should clear obstacle for Cell(2, 3)', function () {
+      grid.setObstacles([new Cell(2, 3)]);
+      grid.clearObstacles([new Cell(2, 3)]);
+      expect(grid.isObstacle(new Cell(2, 3)))
+        .to.be.false;
+    });
+  });
+
+  describe('isObstacle', function () {
+    it('should return false for obstacles not set', function () {
       expect(grid.isObstacle(new Cell(3, 3)))
         .to.be.false;
     });
@@ -167,7 +179,7 @@ describe('WeightedGrid', function () {
         .to.equal(2);
     });
     it('should return 0 for (0,0) and obstacle (2,2)', function () {
-      grid.addObstacles([new Cell(2, 2)]);
+      grid.setObstacles([new Cell(2, 2)]);
       expect(grid.estimate(new Cell(0, 0), new Cell(2, 2)))
         .to.equal(0);
     });
