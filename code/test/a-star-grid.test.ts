@@ -4,7 +4,7 @@ import 'mocha';
 import { Cell, Grid, WeightedGrid } from '../src/grid';
 import { AStarGrid } from '../src/a-star-grid';
 
-describe('AStarGrid', function () {
+describe('A Star Grid', function () {
   let grid: AStarGrid;
 
   beforeEach('make a 10x10 grid', () => {

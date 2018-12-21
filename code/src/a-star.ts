@@ -66,14 +66,12 @@ export function aStar<NodeType>(startNode: NodeType, endNode: NodeType, graph: A
     openList.pop();
 
     // if reached the end position, construct the path and return it
-    if (node == endNode) {
+    if (node === endNode) {
       let path: NodeType[] = [node];
-
-      while (graph.getData(node).parent != undefined) {
+      while (graph.getData(node).parent !== undefined) {
         node = graph.getData(node).parent;
         path.push(node);
       }
-
       return path.reverse();
     }
 
@@ -105,6 +103,7 @@ export function aStar<NodeType>(startNode: NodeType, endNode: NodeType, graph: A
           // the neighbor can be reached with smaller cost.
           // Since its f value has been updated, we have to
           // update its position in the open list
+          // (no idea when this would actually happen)
           openList.updateItem(neighbor);
         }
       }

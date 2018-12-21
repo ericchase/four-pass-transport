@@ -44,5 +44,19 @@ describe('A Star', function () {
                    grid))
         .to.be.length(5);
     });
+    it('should not find a path when surrounded by obstacles', () => {
+      grid.addObstacles([new Cell(0, 1), new Cell(1, 0), new Cell(1, 2), new Cell(2, 1)]);
+      expect(aStar(new Cell(1, 1),
+                   new Cell(3, 3),
+                   grid))
+        .to.be.empty;
+    });
+    it('should update node when finding shorter path', () => {
+      grid.addObstacles([new Cell(2, 2), new Cell(3, 2)]);
+      expect(aStar(new Cell(2, 0),
+                   new Cell(2, 3),
+                   grid))
+        .to.be.length(6);
+    });
   });
 });
