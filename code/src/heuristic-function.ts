@@ -1,8 +1,8 @@
 export interface Point {
-  getX(): number;
-  getY(): number;
+  x: number;
+  y: number;
 }
 
 export function manhattanDistance(a: Point, b: Point): number {
-  return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
+  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 }
