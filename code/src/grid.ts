@@ -2,11 +2,17 @@ import { Graph, WeightedGraph } from './graph';
 import { Point, manhattanDistance } from './heuristic-function';
 
 
-export class Cell extends Point {
+export class Cell implements Point {
   constructor(readonly row: number,
               readonly col: number
-  ) {
-    super(col, row);
+  ) { }
+
+  getX(): number {
+    return this.col;
+  }
+
+  getY(): number {
+    return this.row;
   }
 }
 
