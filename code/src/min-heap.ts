@@ -31,7 +31,7 @@ export class MinHeap<T> {
 
   get top(): T {
     if (this.heapSize < 1)
-      throw new Error("heap underflow on pop");
+      throw new Error('heap underflow on pop');
     return this.arr[0];
   }
 
@@ -43,10 +43,10 @@ export class MinHeap<T> {
 
   pop(): void {
     if (this.heapSize < 1)
-      throw new Error("heap underflow on pop");
+      throw new Error('heap underflow on pop');
     this.arr[0] = this.arr[this.heapSize - 1];
     this.heapSize = this.heapSize - 1;
-    if (this.heapSize > 0)
+    if (this.heapSize > 1)
       this.siftDown(0);
   }
 
@@ -80,7 +80,11 @@ export class MinHeap<T> {
 
     if (smallest !== index) {
       [this.arr[index], this.arr[smallest]] = [this.arr[smallest], this.arr[index]];
-      this.siftDown(index);
+
+      //TODO: how did I miss this? why wasn't it covered in test cases?
+      // possibly needed enough elements to trigger this problem.
+      //this.siftDown(index); // incorrect
+      this.siftDown(smallest);
     }
   }
 }

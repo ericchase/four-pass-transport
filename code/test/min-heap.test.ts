@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { MinHeap } from "../src/min-heap";
+import { MinHeap } from '../src/min-heap';
 
 let myHeap: MinHeap<number>;
 
@@ -147,6 +147,31 @@ describe('MinHeap', function () {
           .to.include.deep.members([3, 4, 5]);
         expect(myHeap.top)
           .to.equal(3);
+      });
+      it('should test that sift-down is properly working for many elements', () => {
+        myHeap.push(1);
+        myHeap.push(2);
+        myHeap.push(3);
+        myHeap.push(4);
+        myHeap.push(5);
+        myHeap.push(6);
+        myHeap.push(7);
+        myHeap.push(8);
+        myHeap.push(9);
+        myHeap.push(10);
+        myHeap.push(11);
+        myHeap.push(12);
+        myHeap.push(13);
+        myHeap.push(14);
+        myHeap.push(15);
+        myHeap.push(16);
+        myHeap.push(17);
+        myHeap.push(18);
+        myHeap.push(19);
+        myHeap.push(20);
+        myHeap.pop();
+        expect(myHeap.arr)
+          .to.deep.equal([2, 4, 3, 8, 5, 6, 7, 16, 9, 10, 11, 12, 13, 14, 15, 20, 17, 18, 19, 20,]);
       });
     });
 
