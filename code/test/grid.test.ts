@@ -91,6 +91,11 @@ describe('Grid', function () {
                            new Cell(1, 2)))
         .to.be.true;
     });
+    it('should return true for (1,1) and (2,1)', function () {
+      expect(grid.adjacent(new Cell(1, 1),
+                           new Cell(2, 1)))
+        .to.be.true;
+    });
     it('should return false for (1,1) and (2,2)', function () {
       expect(grid.adjacent(new Cell(1, 1),
                            new Cell(2, 2)))
@@ -103,6 +108,11 @@ describe('Grid', function () {
       expect(grid.neighbors(new Cell(0, 0)))
         .to.include.deep.members([new Cell(0, 1),
                                   new Cell(1, 0)]);
+    });
+    it('should return [(8,9),(9,8)] for (9,9)', function () {
+      expect(grid.neighbors(new Cell(9, 9)))
+        .to.include.deep.members([new Cell(8, 9),
+                                  new Cell(9, 8)]);
     });
     it('should return [(0,1),(1,0),(1,2),(2,1)] for (1,1)', function () {
       expect(grid.neighbors(new Cell(1, 1)))

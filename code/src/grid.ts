@@ -7,11 +7,11 @@ export class Cell implements Point {
               readonly col: number
   ) { }
 
-  getX(): number {
+  get x(): number {
     return this.col;
   }
 
-  getY(): number {
+  get y(): number {
     return this.row;
   }
 }
@@ -57,8 +57,8 @@ export class Grid implements Graph<Cell> {
   }
 
   adjacent(nodeA: Cell, nodeB: Cell): boolean {
-    if (nodeA.row == nodeB.row) return Math.abs(nodeA.col - nodeB.col) <= 1;
-    if (nodeA.col == nodeB.col) return Math.abs(nodeA.row - nodeB.row) <= 1;
+    if (nodeA.row === nodeB.row) return Math.abs(nodeA.col - nodeB.col) <= 1;
+    if (nodeA.col === nodeB.col) return Math.abs(nodeA.row - nodeB.row) <= 1;
     return false;
   }
 
@@ -71,14 +71,18 @@ export class Grid implements Graph<Cell> {
     ];
 
     let neighbors: Cell[] = [];
-    if (node.row > this.minRow) if (!this.isObstacle(adjacent[0]))
-      neighbors.push(this.nodes[this.getIndex(adjacent[0])]);
-    if (node.row < this.maxRow) if (!this.isObstacle(adjacent[1]))
-      neighbors.push(this.nodes[this.getIndex(adjacent[1])]);
-    if (node.col > this.minCol) if (!this.isObstacle(adjacent[2]))
-      neighbors.push(this.nodes[this.getIndex(adjacent[2])]);
-    if (node.col < this.maxCol) if (!this.isObstacle(adjacent[3]))
-      neighbors.push(this.nodes[this.getIndex(adjacent[3])]);
+    if (node.row > this.minRow)
+      if (!this.isObstacle(adjacent[0]))
+        neighbors.push(this.nodes[this.getIndex(adjacent[0])]);
+    if (node.row < this.maxRow)
+      if (!this.isObstacle(adjacent[1]))
+        neighbors.push(this.nodes[this.getIndex(adjacent[1])]);
+    if (node.col > this.minCol)
+      if (!this.isObstacle(adjacent[2]))
+        neighbors.push(this.nodes[this.getIndex(adjacent[2])]);
+    if (node.col < this.maxCol)
+      if (!this.isObstacle(adjacent[3]))
+        neighbors.push(this.nodes[this.getIndex(adjacent[3])]);
     return neighbors;
   }
 }
