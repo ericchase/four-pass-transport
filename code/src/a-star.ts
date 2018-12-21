@@ -31,8 +31,10 @@ export class AStarData<NodeType> {
 }
 
 export interface AStarGraph<NodeType> extends WeightedGraph<NodeType> {
-  getNode(node: NodeType): NodeType;
+  clearData(): void;
   getData(node: NodeType): AStarData<NodeType>;
+  getNode(node: NodeType): NodeType;
+  getEndpoint(startNode: NodeType): NodeType;
 }
 
 /**
@@ -41,8 +43,10 @@ export interface AStarGraph<NodeType> extends WeightedGraph<NodeType> {
  *     end positions.
  */
 export function aStar<NodeType>(startNode: NodeType, endNode: NodeType, graph: AStarGraph<NodeType>) {
-  startNode = graph.getNode(startNode);
-  endNode = graph.getNode(endNode);
+  graph.clearData();
+
+  startNode = graph.getEndpoint(startNode);
+  endNode = graph.getEndpoint(endNode);
 
   if (startNode === undefined || endNode === undefined)
     return [];
