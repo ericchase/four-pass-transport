@@ -1,3 +1,6 @@
+// A-Star function heavily influenced from
+// https://github.com/qiao/PathFinding.js/blob/master/src/finders/AStarFinder.js
+
 /*© 2011-2012 Xueqiao Xu <xueqiaoxu@gmail.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of
