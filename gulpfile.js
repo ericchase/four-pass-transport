@@ -8,6 +8,8 @@ const exec = require('gulp-exec');
 // negation patterns are allowed
 // ie. '!build/test/some-file.js'
 
+// Tasks for building.
+
 gulp.task('ts-compile', function (cb) {
   cmd('npx tsc', function (err, stdout, stderr) {
     console.log(stdout);
@@ -23,7 +25,7 @@ gulp.task('js-beautify', function () {
              .pipe(exec(js_beautify));
 });
 
-gulp.task('build', gulp.series(['ts-compile', 'js-beautify']));
+// Standard Tasks
 
 gulp.task('clean', function () {
   return del(['build',
@@ -32,6 +34,10 @@ gulp.task('clean', function () {
              ]);
 });
 
+gulp.task('build', gulp.series(['clean', 'ts-compile', 'js-beautify']));
+
+
+// Run "npm run rebuild-npm" if your node-modules is all messed up.
 gulp.task('remove-npm', function () {
   return del(['node_modules',
               'package-lock.json'

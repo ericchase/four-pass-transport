@@ -28,9 +28,12 @@ export class Grid implements Graph<Cell> {
   constructor(readonly rows: number, readonly columns: number) {
     this.maxRow = rows - 1;
     this.maxCol = columns - 1;
+    this.clearNodes();
+  }
 
-    for (let row = this.minRow; row < rows; ++row) {
-      for (let col = this.minCol; col < columns; ++col) {
+  clearNodes() {
+    for (let row = this.minRow; row < this.rows; ++row) {
+      for (let col = this.minCol; col < this.columns; ++col) {
         const i = this.makeIndex(row, col);
         this.nodes[i] = new Cell(row, col);
         this.obstacles[i] = false;
@@ -46,9 +49,15 @@ export class Grid implements Graph<Cell> {
     return this.makeIndex(node.row, node.col);
   }
 
-  addObstacles(nodes: Cell[]): void {
+  setObstacles(nodes: Cell[]): void {
     nodes.forEach(node => {
       this.obstacles[this.getIndex(node)] = true;
+    });
+  }
+
+  clearObstacles(nodes: Cell[]): void {
+    nodes.forEach(node => {
+      this.obstacles[this.getIndex(node)] = false;
     });
   }
 
