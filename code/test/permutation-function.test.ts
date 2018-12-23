@@ -1,10 +1,18 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { threeAryPermutationGenerator } from "../src/permutation-function"
+import { makePairs, threeAryPermutationGenerator } from '../src/permutation-function';
+
 
 describe('Permutation Functions', function () {
-  describe('threeAryPermutationGenerator*', function () {
+  describe('makePairs', function () {
+    it('should return [[a,b],[b,c],[c,d]] for cells a,b,c,d', () => {
+      expect(makePairs([1, 2, 3, 4]))
+        .to.deep.equal([[1, 2], [2, 3], [3, 4]]);
+    });
+  });
+
+  describe('* threeAryPermutationGenerator', function () {
     it('should yield proper permutations of three arguments', () => {
       let generator = threeAryPermutationGenerator(1, 2, 3);
 
