@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div v-for="i in 10">
-      <div class="square" v-for="j in 10">
-        <div class="content">
-          <div class="table">
-            <div class="table-cell">
-              {{i - 1}}{{j - 1}}
-            </div>
+  <div v-for="i in 10">
+    <div class="square" v-for="j in 10">
+      <div class="content">
+        <div class="table">
+          <div class="table-cell">
+            {{i - 1}}{{j - 1}}
           </div>
         </div>
       </div>
