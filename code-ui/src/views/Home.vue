@@ -1,20 +1,17 @@
-<template>
-  <div class="home">
-    <GridComponent class="center-stage"></GridComponent>
-  </div>
+<template lang="pug">
+  div(class="home")
+    grid-component(class="center-stage")
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
+  import {Vue} from 'vue-property-decorator';
   import GridComponent from '../components/GridComponent.vue';
 
-  @Component({
+  export default Vue.component('Home', {
     components: {
       GridComponent,
     },
-  })
-  export default class Home extends Vue {
-  }
+  });
 </script>
 
 <style scoped>

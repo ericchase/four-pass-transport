@@ -1,20 +1,16 @@
 <template lang="pug">
   div
-    div(v-for="i in 10" :i="i")
-      div(class="square" v-for="j in 10")
-        div(class="content")
-          div(class="table")
-            div(class="table-cell") {{i - 1}}{{j - 1}}
+    div(class="square" v-for="j in 10")
+      div(class="content")
+        div(class="table")
+          div(class="table-cell") {{i - 1}}{{j - 1}}
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import RowComponent from './RowComponent.vue';
 
   export default Vue.extend({
-    components: {
-      RowComponent,
-    },
+    props: ['i'],
   });
 </script>
 
