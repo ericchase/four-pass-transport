@@ -1,8 +1,7 @@
 {
   "name": "four-pass-transport",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
@@ -15,8 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/ericchase/four-pass-transport.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ericchase/four-pass-transport/issues"
   },
@@ -50,7 +48,7 @@
       "code/src/**/*.ts"
     ],
     "exclude": [
-      "code/src/**/*.spec.ts"
+      "."
     ],
     "extension": [
       ".ts"
