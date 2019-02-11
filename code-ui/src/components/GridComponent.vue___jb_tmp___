@@ -1,21 +1,23 @@
-<template lang="pug">
-  div
-    div(v-for="i in 10" :i="i")
-      div(class="square" v-for="j in 10")
-        div(class="content")
-          div(class="table")
-            div(class="table-cell") {{i - 1}}{{j - 1}}
+<template>
+  <div>
+    <div v-for="i in 10">
+      <div class="square" v-for="j in 10">
+        <div class="content">
+          <div class="table">
+            <div class="table-cell"> {{i - 1}}{{j - 1}} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import RowComponent from './RowComponent.vue';
+  import { Component, Vue } from 'vue-property-decorator';
 
-  export default Vue.extend({
-    components: {
-      RowComponent,
-    },
-  });
+  @Component
+  export default class GridComponent extends Vue {
+  }
 </script>
 
 <style scoped>
@@ -29,7 +31,7 @@
   }
 
   .content {
-    background-color: lightgrey;
+    background-color: grey;
     position: absolute;
     height: 99%; /* = 100% - 2*10% padding */
     width: 99%; /* = 100% - 2*5% padding */
